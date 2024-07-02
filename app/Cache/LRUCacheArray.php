@@ -5,10 +5,10 @@ namespace App\Cache;
 class LRUCacheArray extends LRUCache
 {
     /** @var array <string, mixed> */
-    protected array $map = [];
+    private array $map = [];
 
-    protected array $keys = [];
-    
+    private array $keys = [];
+
     public function put(string $key, mixed $value): void
     {
         if (count($this->keys) >= $this->capacity) {
