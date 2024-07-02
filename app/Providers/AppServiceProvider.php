@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Cache\LRUCache;
+use App\Cache\LRUCacheRedisSet;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +21,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->singleton(
+            LRUCache::class,
+            function () {
+                return new LRUCacheRedisSet(
+                    5,
+                    'search:recent:keys:' . request()->user()->id,
+                    'search:recent:cache:' . request()->user()->id,
+                );
+        });
     }
 }
