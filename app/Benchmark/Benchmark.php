@@ -29,30 +29,14 @@ class Benchmark
         };
 
         \Illuminate\Support\Benchmark::dd([
-            'array:1_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheArray(1_000), 1_000);
-            },
-            'array:10_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheArray(10_000), 10_000);
-            },
-            'linked_list:1_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheLinkedList(1_000), 1_000);
-            },
-            'linked_list:10_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheLinkedList(10_000), 10_000);
-            },
-            'redis_set:1_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheRedisSet(1_000, 'items_set', 'cache_set'), 1_000);
-            },
-            'redis_set:10_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheRedisSet(10_000, 'items_set', 'cache_set'), 10_000);
-            },
-            'redis_list:1_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheRedisList(1_000, 'items_list', 'cache_list'), 1_000);
-            },
-            'redis_list:10_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheRedisList(10_000, 'items_list', 'cache_list'), 10_000);
-            },
+            'array:1_000' => fn () => $benchmark(new LRUCacheArray(1_000), 1_000),
+            'array:10_000' => fn () => $benchmark(new LRUCacheArray(10_000), 10_000),
+            'linked_list:1_000' => fn () => $benchmark(new LRUCacheLinkedList(1_000), 1_000),
+            'linked_list:10_000' => fn () => $benchmark(new LRUCacheLinkedList(10_000), 10_000),
+            'redis_set:1_000' => fn () => $benchmark(new LRUCacheRedisSet(1_000, 'items_set', 'cache_set'), 1_000),
+            'redis_set:10_000' => fn () => $benchmark(new LRUCacheRedisSet(10_000, 'items_set', 'cache_set'), 10_000),
+            'redis_list:1_000' => fn () => $benchmark(new LRUCacheRedisList(1_000, 'items_list', 'cache_list'), 1_000),
+            'redis_list:10_000' => fn () => $benchmark(new LRUCacheRedisList(10_000, 'items_list', 'cache_list'), 10_000),
         ]);
     }
 }

@@ -10,17 +10,17 @@ class LRUCacheArray extends LRUCache
     /** @var array <string, mixed> */
     private array $map = [];
 
-    private array $keys = [];
+    private array $items = [];
 
     public function put(string $key, mixed $value): void
     {
-        if (count($this->keys) >= $this->capacity) {
-            $removedKey = array_pop($this->keys);
+        if (count($this->items) >= $this->capacity) {
+            $removedKey = array_pop($this->items);
 
             unset($this->map[$removedKey]);
         }
 
-        array_unshift($this->keys, $key);
+        array_unshift($this->items, $key);
 
         $this->map[$key] = $value;
     }
@@ -38,16 +38,16 @@ class LRUCacheArray extends LRUCache
 
     private function update(string $key): void
     {
-        $idx = array_search($key, $this->keys);
+        $idx = array_search($key, $this->items);
 
         if ($idx === false) {
             return;
         }
 
-        unset($this->keys[$idx]);
+        unset($this->items[$idx]);
 
-        $this->keys = array_values($this->keys);
+        $this->items = array_values($this->items);
 
-        array_unshift($this->keys, $key);
+        array_unshift($this->items, $key);
     }
 }
