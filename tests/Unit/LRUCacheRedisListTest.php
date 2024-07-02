@@ -2,12 +2,12 @@
 
 namespace Tests\Unit;
 
-use App\Cache\LRUCacheRedis;
+use App\Cache\LRUCacheRedisList;
 use Illuminate\Support\Facades\Redis;
 use PHPUnit\Framework\Attributes\Test;
 use Tests\TestCase;
 
-class LRUCacheRedisTest extends TestCase
+class LRUCacheRedisListTest extends TestCase
 {
     protected function setUp(): void
     {
@@ -19,7 +19,7 @@ class LRUCacheRedisTest extends TestCase
     #[Test]
     public function it_should_keep_elements_in_the_right_order()
     {
-        $lru = new LRUCacheRedis(2, 'items', 'cache');
+        $lru = new LRUCacheRedisList(2, 'items', 'cache');
 
         $lru->put('first', 1);
         $lru->put('second', 2);

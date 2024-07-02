@@ -5,6 +5,7 @@ namespace App\Benchmark;
 use App\Cache\LRUCache;
 use App\Cache\LRUCacheArray;
 use App\Cache\LRUCacheLinkedList;
+use App\Cache\LRUCacheRedisList;
 
 class Benchmark
 {
@@ -30,17 +31,17 @@ class Benchmark
             'array_10_000' => function () use ($benchmark) {
                 $benchmark(new LRUCacheArray(10_000), 10_000);
             },
-            'array_1_000_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheArray(1_000_000), 1_000_000);
-            },
             'linked_list_1000' => function () use ($benchmark) {
                 $benchmark(new LRUCacheLinkedList(1_000), 1_000);
             },
             'linked_list_10_000' => function () use ($benchmark) {
                 $benchmark(new LRUCacheLinkedList(10_000), 10_000);
             },
-            'linked_list_1_000_000' => function () use ($benchmark) {
-                $benchmark(new LRUCacheLinkedList(1_000_000), 1_000_000);
+            'redis_1000' => function () use ($benchmark) {
+                $benchmark(new LRUCacheRedisList(1_000, 'items', 'cache'), 1_000);
+            },
+            'redis_10_000' => function () use ($benchmark) {
+                $benchmark(new LRUCacheRedisList(10_000, 'items', 'cache'), 10_000);
             },
         ]);
 

@@ -4,7 +4,7 @@ namespace App\Cache;
 
 use Illuminate\Support\Facades\Redis;
 
-class LRUCacheRedis extends LRUCache
+class LRUCacheRedisList extends LRUCache
 {
     private string $listKey;
 
