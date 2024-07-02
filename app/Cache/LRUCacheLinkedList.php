@@ -7,14 +7,14 @@ namespace App\Cache;
  */
 class LRUCacheLinkedList extends LRUCache
 {
-    public Node $head;
+    private Node $head;
 
     private Node $tail;
 
     /** @var array<string, Node> */
     private array $map = [];
 
-    public int $length;
+    private int $length;
 
     public function __construct(int $capacity)
     {
@@ -70,6 +70,7 @@ class LRUCacheLinkedList extends LRUCache
     {
         $node->next = $this->tail;
         $node->prev = $this->tail->prev;
+
         $node->prev->next = $node;
         $this->tail->prev = $node;
 
