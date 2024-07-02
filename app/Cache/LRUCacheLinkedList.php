@@ -2,6 +2,9 @@
 
 namespace App\Cache;
 
+/**
+ * O(1)
+ */
 class LRUCacheLinkedList extends LRUCache
 {
     public Node $head;

@@ -2,6 +2,9 @@
 
 namespace App\Cache;
 
+/**
+ * O(N)
+ */
 class LRUCacheArray extends LRUCache
 {
     /** @var array <string, mixed> */

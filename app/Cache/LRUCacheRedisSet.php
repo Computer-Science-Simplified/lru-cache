@@ -4,6 +4,9 @@ namespace App\Cache;
 
 use Illuminate\Support\Facades\Redis;
 
+/**
+ * O(log(N)
+ */
 class LRUCacheRedisSet extends LRUCache
 {
     private string $setKey;
