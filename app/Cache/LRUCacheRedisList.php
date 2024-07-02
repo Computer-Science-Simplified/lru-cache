@@ -49,4 +49,20 @@ class LRUCacheRedisList extends LRUCache
 
         return $value;
     }
+
+    /**
+     * @return array<int, mixed>
+     */
+    public function getAll(?callable $action = null): array
+    {
+        $items = Redis::hgetall($this->mapKey);
+
+        if ($action) {
+            return collect($items)
+                ->map(fn ($item) => $action($item))
+                ->all();
+        }
+
+        return $items;
+    }
 }

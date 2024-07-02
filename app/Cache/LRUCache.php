@@ -11,4 +11,9 @@ abstract class LRUCache
     abstract public function put(string $key, mixed $value): void;
 
     abstract public function get(string $key): mixed;
+
+    /**
+     * @return array<int, mixed>
+     */
+    abstract public function getAll(?callable $action = null): array;
 }
