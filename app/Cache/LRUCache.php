@@ -15,5 +15,5 @@ abstract class LRUCache
     /**
      * @return array<int, mixed>
      */
-    abstract public function getAll(?callable $action = null): array;
+    abstract public function getAll(?callable $callback = null): array;
 }

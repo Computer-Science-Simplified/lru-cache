@@ -53,13 +53,13 @@ class LRUCacheRedisList extends LRUCache
     /**
      * @return array<int, mixed>
      */
-    public function getAll(?callable $action = null): array
+    public function getAll(?callable $callback = null): array
     {
         $items = Redis::hgetall($this->mapKey);
 
-        if ($action) {
+        if ($callback) {
             return collect($items)
-                ->map(fn ($item) => $action($item))
+                ->map(fn ($item) => $callback($item))
                 ->all();
         }
 

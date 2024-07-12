@@ -89,11 +89,11 @@ class LRUCacheLinkedList extends LRUCache
         unset($this->map[$node->key]);
     }
 
-    public function getAll(?callable $action = null): array
+    public function getAll(?callable $callback = null): array
     {
-        if ($action) {
+        if ($callback) {
             return collect($this->map)
-                ->map(fn ($item) => $action($item))
+                ->map(fn ($item) => $callback($item))
                 ->all();
         }
 
